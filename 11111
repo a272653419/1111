@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>我的第一个网页</title>
+    <title>签到页面</title>
+    <style>
+        body { text-align: center; padding: 50px; font-family: Arial, sans-serif; }
+        .sign-btn { padding: 10px 20px; font-size: 16px; background: #2ea44f; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .sign-btn:disabled { background: #94d3a2; cursor: not-allowed; }
+        .result { margin-top: 20px; font-size: 18px; color: #333; }
+    </style>
 </head>
 <body>
-    <h1>Hello, GitHub Pages!</h1>
-    <p>这是通过 GitHub Pages 发布的网页。</p>
+    <h1>每日签到</h1>
+    <button class="sign-btn" id="signBtn">点击签到</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        const signBtn = document.getElementById('signBtn');
+        const result = document.getElementById('result');
+
+        // 检查今日是否已签到
+        const today = new Date().toDateString();
+        if (localStorage.getItem('lastSignDate') === today) {
+            signBtn.disabled = true;
+            result.textContent = "今日已签到，明天再来吧！";
+        }
+
+        // 签到按钮点击事件
+        signBtn.addEventListener('click', () => {
+            localStorage.setItem('lastSignDate', today);
+            signBtn.disabled = true;
+            result.textContent = "签到成功！";
+        });
+    </script>
 </body>
 </html>
